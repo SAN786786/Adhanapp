@@ -1,0 +1,438 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Traditional Arabic', 'Amiri', serif;
+    color: #f0f0f0;
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+/* Swipe container for Prayer/Qibla views */
+.swipe-container {
+    display: flex;
+    width: 200vw; /* Two views side-by-side */
+    height: 100vh;
+    transition: transform 0.5s ease-in-out;
+}
+
+.view {
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Move to Qibla view */
+.swipe-container.qibla-active {
+    transform: translateX(-100vw);
+}
+
+/* Background with Kaaba image */
+.app-container {
+    position: relative;
+    min-height: 100vh;
+    background: url('kaaba.jpg') center/cover no-repeat;
+    background-attachment: fixed;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(26, 26, 46, 0.85) 0%,
+        rgba(26, 26, 46, 0.75) 50%,
+        rgba(26, 26, 46, 0.85) 100%
+    );
+    z-index: 1;
+}
+
+/* Header styles */
+.app-header {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(1px);
+}
+
+.live-time {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #d4af37;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.05em;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+    .live-time {
+        font-size: 1.2rem;
+        top: 0.5rem;
+        right: 1rem;
+    }
+    
+    .app-header {
+        padding: 1.5rem 1rem 0.75rem;
+    }
+}
+
+.app-header h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: #d4af37;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    margin-bottom: 0.5rem;
+}
+
+.location {
+    font-size: 1.1rem;
+    color: #b8b8b8;
+    font-style: italic;
+}
+
+/* Main content */
+.main-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Current prayer card */
+.current-prayer {
+    margin-bottom: 2rem;
+}
+
+.prayer-card {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    backdrop-filter: blur(1px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.prayer-card h2 {
+    font-size: 2rem;
+    color: #d4af37;
+    margin-bottom: 0.5rem;
+}
+
+.prayer-time {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.countdown {
+    font-size: 1.2rem;
+    color: #b8b8b8;
+}
+
+/* Prayer times list */
+.prayer-times {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 15px;
+    overflow: hidden;
+    backdrop-filter: blur(1px);
+    margin-bottom: 2rem;
+}
+
+.prayer-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.prayer-item:last-child {
+    border-bottom: none;
+}
+
+.prayer-item:hover {
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.prayer-name {
+    font-size: 1.3rem;
+    color: #d4af37;
+}
+
+.prayer-time {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Date section */
+.date-section {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 15px;
+    padding: 1.5rem;
+    backdrop-filter: blur(1px);
+}
+
+.date-section p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+#hijri-date {
+    color: #d4af37;
+    font-weight: bold;
+}
+
+#gregorian-date {
+    color: #b8b8b8;
+}
+
+/* Settings & Qibla buttons */
+.settings-btn, .qibla-btn {
+    position: fixed;
+    bottom: 2rem;
+    background: rgba(212, 175, 55, 0.8);
+    color: #1a1a2e;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.settings-btn {
+    right: 2rem;
+}
+.qibla-btn {
+    left: 2rem;
+}
+
+.settings-btn:hover, .qibla-btn:hover {
+    background: #d4af37;
+    transform: scale(1.1);
+}
+
+/* Back button on Qibla view */
+.back-btn {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    background: rgba(212, 175, 55, 0.8);
+    color: #1a1a2e;
+    border: none;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #d4af37;
+    transform: scale(1.05);
+}
+
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: rgba(26, 26, 46, 0.95);
+    margin: 10% auto;
+    padding: 2rem;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    backdrop-filter: blur(10px);
+}
+
+.close {
+    color: #d4af37;
+    float: right;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #ffffff;
+}
+
+.setting-group {
+    margin: 1.5rem 0;
+}
+
+.setting-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #d4af37;
+}
+
+.setting-group input,
+.setting-group select {
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-radius: 8px;
+    color: #f0f0f0;
+    font-size: 1rem;
+}
+
+.setting-group input:focus,
+.setting-group select:focus {
+    outline: none;
+    border-color: #d4af37;
+}
+
+/* Qibla Finder Styles */
+#qibla-view {
+    background: #1a1a2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.qibla-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 2rem;
+}
+
+.qibla-header h2 {
+    font-size: 2.2rem;
+    color: #d4af37;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#qibla-direction-text {
+    font-size: 1.4rem;
+    color: #b8b8b8;
+    margin-top: 0.5rem;
+}
+
+.qibla-compass {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.compass-dial {
+    width: 100%;
+    height: 100%;
+    border: 3px solid rgba(212, 175, 55, 0.3);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    transition: border-color 0.3s ease;
+}
+
+.compass-dial.aligned {
+    border-color: #d4af37;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+}
+
+.compass-pointer {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 140px solid #d4af37;
+    transform-origin: bottom center;
+    transition: transform 0.2s linear;
+    top: 10px;
+}
+
+.compass-pointer::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #d4af37;
+    border-radius: 50%;
+    left: -10px;
+    bottom: -150px;
+}
+
+#qibla-found-message {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #d4af37;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease-in-out;
+}
+
+#qibla-found-message.visible {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.permission-btn {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background: #d4af37;
+    color: #1a1a2e;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 10;
+    display: none; /* Hidden by default */
+}

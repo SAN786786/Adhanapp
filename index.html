@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adhan</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Fallback CSS */
+        body { font-family: Arial, sans-serif; color: #fff; background: #1a1a2e; }
+        .app-container { position: relative; min-height: 100vh; padding: 1rem; }
+        .app-header { text-align: center; }
+        .prayer-card { background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 10px; }
+        .settings-btn { position: fixed; bottom: 20px; right: 20px; padding: 10px; }
+        .modal { display: none; background: rgba(0,0,0,0.7); position: fixed; top: 0; left: 0; width: 100%; height: 100%; }
+        .modal-content { background: #1a1a2e; margin: 15% auto; padding: 20px; width: 80%; max-width: 500px; border-radius: 10px; }
+        .close { float: right; font-size: 1.5rem; cursor: pointer; }
+        .setting-group { margin: 1rem 0; }
+        .setting-group input, .setting-group select { width: 100%; padding: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="swipe-container">
+        <div class="view" id="main-view">
+            <div class="app-container">
+                <div class="background-overlay"></div>
+                <header class="app-header">
+                    <h1>Adhan</h1>
+                    <div class="location" id="location">Loading location...</div>
+                    <div class="live-time" id="live-time">Loading time...</div>
+                </header>
+
+                <main class="main-content">
+                    <section class="current-prayer">
+                        <div class="prayer-card">
+                            <h2 id="current-prayer-name">Loading...</h2>
+                            <div class="prayer-time" id="current-prayer-time">Loading...</div>
+                            <div class="countdown" id="countdown">Next prayer in...</div>
+                        </div>
+                    </section>
+
+                    <section class="prayer-times">
+                        <div class="prayer-item">
+                            <span class="prayer-name">Fajr</span>
+                            <span class="prayer-time" id="fajr-time">Loading...</span>
+                        </div>
+                        <div class="prayer-item">
+                            <span class="prayer-name">Sunrise</span>
+                            <span class="prayer-time" id="sunrise-time">Loading...</span>
+                        </div>
+                        <div class="prayer-item">
+                            <span class="prayer-name">Dhuhr</span>
+                            <span class="prayer-time" id="dhuhr-time">Loading...</span>
+                        </div>
+                        <div class="prayer-item">
+                            <span class="prayer-name">Asr</span>
+                            <span class="prayer-time" id="asr-time">Loading...</span>
+                        </div>
+                        <div class="prayer-item">
+                            <span class="prayer-name">Maghrib</span>
+                            <span class="prayer-time" id="maghrib-time">Loading...</span>
+                        </div>
+                        <div class="prayer-item">
+                            <span class="prayer-name">Isha</span>
+                            <span class="prayer-time" id="isha-time">Loading...</span>
+                        </div>
+                    </section>
+
+                    <section class="date-section">
+                        <p id="hijri-date">Loading Hijri date...</p>
+                        <p id="gregorian-date">Loading Gregorian date...</p>
+                    </section>
+
+                </main>
+
+                <button class="settings-btn" id="settingsBtn">⚙️</button>
+                <button id="qiblaBtn" class="qibla-btn">🕋</button>
+
+                <div id="settingsModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Settings</h2>
+                        <div class="setting-group">
+                            <label for="locationInput">Location:</label>
+                            <input type="text" id="locationInput" placeholder="Enter city name">
+                        </div>
+                        <div class="setting-group">
+                            <label for="methodSelect">Calculation Method:</label>
+                            <select id="methodSelect">
+                                <option value="MWL">Muslim World League</option>
+                                <option value="ISNA">Islamic Society of North America</option>
+                                <option value="Egypt">Egyptian General Authority</option>
+                                <option value="Makkah">Umm Al-Qura University, Makkah</option>
+                                <option value="Karachi" selected>University of Islamic Sciences, Karachi</option>
+                                <option value="Tehran">Institute of Geophysics, Tehran</option>
+                            </select>
+                        </div>
+                        <div class="setting-group">
+                            <label for="madhabSelect">Madhab:</label>
+                            <select id="madhabSelect">
+                                <option value="Shafi">Shafi'i</option>
+                                <option value="Hanafi" selected>Hanafi</option>
+                            </select>
+                        </div>
+                        <button id="saveSettings">Save Settings</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="view" id="qibla-view">
+            <button id="backBtn" class="back-btn">&larr; Back</button>
+            <div class="qibla-container">
+                <header class="qibla-header">
+                    <h2>Qibla Direction</h2>
+                    <p id="qibla-direction-text">Align with arrow</p>
+                </header>
+                <main class="qibla-compass">
+                    <div class="compass-dial"></div>
+                    <div class="compass-pointer" id="compass-pointer"></div>
+                </main>
+                <footer class="qibla-footer">
+                    <div id="qibla-found-message">ma sha allah</div>
+                </footer>
+            </div>
+            <button id="permission-btn" class="permission-btn">Enable Compass</button>
+        </div>
+    </div>
+
+    <script src="prayer-times.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
